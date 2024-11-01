@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 Lucky Draw Campaign</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Main Styles */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: #333;
+            overflow-y: auto;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 500px;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Title Animation */
+        h1 {
+            color: #2575fc;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            animation: slideIn 1.5s ease-out forwards;
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Subtitle */
+        p {
+            color: #666;
+            font-size: 1em;
+            margin-bottom: 20px;
+        }
+
+        /* Form Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .form-group:hover {
+            transform: scale(1.02);
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: #666;
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            background: #ffffff;
+            padding: 0 5px;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 15px 15px 15px 40px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #2575fc;
+            box-shadow: 0 4px 8px rgba(37, 117, 252, 0.1);
+        }
+
+        .form-group i {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            color: #999;
+        }
+
+        /* Button Styling */
+        .share-btn, .submit-btn {
+            width: 100%;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            transform-origin: center;
+        }
+
+        .share-btn {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+        }
+
+        .share-btn:hover {
+            background-color: #ff4757;
+            transform: scale(1.05);
+        }
+
+        .submit-btn {
+            background-color: #2575fc;
+            color: white;
+            border: none;
+        }
+
+        .submit-btn:hover {
+            background-color: #1a5ecc;
+            transform: scale(1.05);
+        }
+
+        /* Note Styling */
+        .note {
+            font-size: 0.9em;
+            color: #d9534f;
+            margin-top: 15px;
+        }
+
+        .warning {
+            font-size: 0.9em;
+            color: #ff6b6b;
+            margin: 10px 0;
+        }
+
+        /* Thank You Message Animation */
+        .thank-you {
+            display: none;
+            font-size: 2em;
+            color: #2575fc;
+            font-weight: bold;
+            margin-top: 20px;
+            animation: popIn 0.5s ease-out forwards;
+            opacity: 0;
+            transform: scale(0.5);
+        }
+
+        @keyframes popIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+            position: relative;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 15px;
+        }
+
+        .modal-content button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #2575fc;
+            color: white;
+        }
+
+        .modal-content button:hover {
+            background-color: #1a5ecc;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1><i class="fas fa-gift"></i> 2025 Lucky Draw Campaign</h1>
+        <p>Hey Students! Participate in the 2025 Lucky Draw Campaign by filling out this form. Good luck!</p>
+
+        <form id="luckyDrawForm" onsubmit="showThankYou(event)">
+            <div class="form-group">
+                <label for="first-name">First Name</label>
+                <i class="fas fa-user"></i>
+                <input type="text" id="first-name" name="first-name" placeholder="Enter your first name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="last-name">Last Name</label>
+                <i class="fas fa-user"></i>
+                <input type="text" id="last-name" name="last-name" placeholder="Enter your last name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <i class="fas fa-phone"></i>
+                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <i class="fas fa-calendar-alt"></i>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+
+            <div class="form-group">
+                <label for="school-name">School Name</label>
+                <i class="fas fa-school"></i>
+                <input type="text" id="school-name" name="school-name" placeholder="Enter your school name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="class">Class</label>
+                <i class="fas fa-graduation-cap"></i>
+                <select id="class" name="class" required>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="faculty">Faculty</label>
+                <i class="fas fa-book"></i>
+                <select id="faculty" name="faculty" required>
+                    <option value="science">Science</option>
+                    <option value="management">Management</option>
+                    <option value="arts">Arts</option>
+                    <option value="others">Others</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="reason">Reason why you should be the winner</label>
+                <i class="fas fa-question-circle"></i>
+                <textarea id="reason" name="reason" rows="4" placeholder="Why should you win?" required></textarea>
+            </div>
+
+            <button type="button" class="share-btn" onclick="openShareModal()">Share</button>
+
+            <p class="note" id="shareCountNote">* You need to share at least 5 times to enable the submit button.</p>
+            <p class="warning" id="warningText">Warning: You have not shared enough times to submit the form.</p>
+            
+            <button type="submit" class="submit-btn" id="submitButton" disabled>Submit</button>
+        </form>
+
+        <div class="thank-you" id="thankYouMessage">Thank You for Participating!</div>
+    </div>
+
+    <!-- Share Modal -->
+    <div class="modal" id="shareModal">
+        <div class="modal-content">
+            <h2>Share This Page</h2>
+            <p id="shareCounter">You have shared this page <span id="shareCount">5</span> times.</p>
+            <button onclick="sharePage()">Share Now</button>
+            <button onclick="closeShareModal()">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        let sharesRemaining = 5;
+
+        function showThankYou(event) {
+            event.preventDefault(); // Prevents actual form submission
+            const form = document.getElementById('luckyDrawForm');
+            const thankYouMessage = document.getElementById('thankYouMessage');
+
+            form.style.display = 'none'; // Hides form
+            thankYouMessage.style.display = 'block'; // Shows thank-you message
+        }
+
+        function openShareModal() {
+            document.getElementById('shareModal').style.display = 'flex';
+            updateShareCountDisplay();
+        }
+
+        function closeShareModal() {
+            document.getElementById('shareModal').style.display = 'none';
+        }
+
+        function sharePage() {
+            if (sharesRemaining > 0) {
+                sharesRemaining--;
+                updateShareCountDisplay();
+                if (sharesRemaining === 0) {
+                    document.getElementById('submitButton').disabled = false; // Enable the submit button
+                    document.getElementById('shareCountNote').textContent = "* You have shared enough times to enable the submit button.";
+                }
+            }
+        }
+
+        function updateShareCountDisplay() {
+            document.getElementById('shareCount').textContent = sharesRemaining;
+            document.getElementById('warningText').style.display = sharesRemaining < 1 ? 'none' : 'block';
+            if (sharesRemaining < 5) {
+                document.getElementById('warningText').textContent = `Warning: You have not shared enough times to submit the form. Remaining shares: ${sharesRemaining}.`;
+            } else {
+                document.getElementById('warningText').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
